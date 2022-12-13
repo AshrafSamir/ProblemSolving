@@ -27,60 +27,40 @@ public:
             if(current1 == nullptr && current2 != nullptr)
             {
                 value = 0 + current2->val + rem;
-                if(rem == 1)rem = 0;
             }
             else if(current2 == nullptr && current1 != nullptr)
             {
                 value = current1->val + 0 + rem;
-                if(rem == 1)rem = 0;
             }
             else if(current1!=nullptr && current2!=nullptr)
             {
                 value = current1->val + current2->val + rem;
-                if(rem == 1)rem = 0;
             }
             else
             {
                 value = rem;
-                if(rem == 1)rem = 0;
             }
+
+            if(rem == 1)rem = 0;
 
             if(value >= 10)
             {
-
-                if(flag)
-                {
-                    value = value % 10;
-                    ListNode *node = new ListNode(value);
-                    current3->next = node;
-                    current3 = node;
-
-                }
-                else
-                {
-                    value = value % 10;
-                    current3->val = value;
-
-                }
-
+                value = value % 10;
                 rem = 1;
+            }
+
+            if(flag)
+            {
+                ListNode *node = new ListNode(value);
+                current3->next = node;
+                current3 = node;
             }
             else
             {
-                if(flag)
-                {
-                    ListNode *node = new ListNode(value);
-                    current3->next = node;
-                    current3 = node;
-
-                }
-                else
-                {
-
-                    current3->val = value;
-
-                }
+                current3->val = value;
             }
+
+
 
             flag = true;
             if(current1!=nullptr)current1 = current1->next;
