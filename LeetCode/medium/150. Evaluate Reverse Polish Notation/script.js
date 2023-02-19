@@ -10,7 +10,7 @@ var evalRPN = function (tokens) {
     "*": (a, b) => a * b,
     "/": (a, b) => (a / b) | 0,
   };
-  for (let i = 0; i < tokens.length; i++) {
+  for (let i = 0; i < tokens.length; i++){
     if (tokens[i] in operators) {
       let b = stack.pop();
       let a = stack.pop();
