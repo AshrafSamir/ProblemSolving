@@ -39,19 +39,37 @@ var largestRectangleArea = function (heights) {
 
   return maxArea;
 };
+
+var largestRectangleAreaEnhanced = function (heights) {
+  let maxArea = 0;
+  let stack = [];
+  heights.push(0); // Add a sentinel element to handle remaining elements
+
+  for (let i = 0; i < heights.length; i++) {
+    while (stack.length && heights[i] < heights[stack[stack.length - 1]]) {
+      const height = heights[stack.pop()];
+      const width = stack.length === 0 ? i : i - stack[stack.length - 1] - 1;
+      maxArea = Math.max(maxArea, height * width);
+    }
+    stack.push(i);
+  }
+
+  return maxArea;
+};
+
 debugger;
-console.log(largestRectangleArea([5, 5, 1, 7, 1, 1, 5, 2, 7, 6])); //12
+console.log(largestRectangleAreaEnhanced([5, 5, 1, 7, 1, 1, 5, 2, 7, 6])); //12
 
-console.log(largestRectangleArea([3, 6, 5, 7, 4, 8, 1, 0])); //20
-console.log(largestRectangleArea([2, 1, 5, 6, 2, 3]));
-console.log(largestRectangleArea([2, 4]));
-console.log(largestRectangleArea([0, 0]));
-console.log(largestRectangleArea([1]));
+console.log(largestRectangleAreaEnhanced([3, 6, 5, 7, 4, 8, 1, 0])); //20
+console.log(largestRectangleAreaEnhanced([2, 1, 5, 6, 2, 3]));
+console.log(largestRectangleAreaEnhanced([2, 4]));
+console.log(largestRectangleAreaEnhanced([0, 0]));
+console.log(largestRectangleAreaEnhanced([1]));
 
-console.log(largestRectangleArea([0, 9])); // result 9
-console.log(largestRectangleArea([2, 1, 2])); // result 3
-console.log(largestRectangleArea([2, 1, 2, 3, 1])); // 5
-console.log(largestRectangleArea([2, 1, 2, 3, 1, 2])); // 6
-console.log(largestRectangleArea([2, 1, 2, 3, 1, 2, 2])); // 7
-console.log(largestRectangleArea([2, 1, 2, 3, 1, 2, 2, 2])); // 8
-console.log(largestRectangleArea([2, 1, 2, 3, 1, 2, 2, 2, 2])); // 9
+console.log(largestRectangleAreaEnhanced([0, 9])); // result 9
+console.log(largestRectangleAreaEnhanced([2, 1, 2])); // result 3
+console.log(largestRectangleAreaEnhanced([2, 1, 2, 3, 1])); // 5
+console.log(largestRectangleAreaEnhanced([2, 1, 2, 3, 1, 2])); // 6
+console.log(largestRectangleAreaEnhanced([2, 1, 2, 3, 1, 2, 2])); // 7
+console.log(largestRectangleAreaEnhanced([2, 1, 2, 3, 1, 2, 2, 2])); // 8
+console.log(largestRectangleAreaEnhanced([2, 1, 2, 3, 1, 2, 2, 2, 2])); // 9
